@@ -77,8 +77,19 @@ void Game::Render() const
 	ball.Draw();
 
 	// TODO #3 - Update render to render all bricks
-	brick.Draw();
-
+	for (auto& brick : bricks)
+	{
+		brick.Draw();
+	}
+	if (bricks.empty()) 
+	{
+		Console::WordWrap(WINDOW_WIDTH / 2 - 15, WINDOW_HEIGHT / 2, 30, "You win! Press 'R' to play again.");
+	}
+	else if (ball.y_position >= WINDOW_HEIGHT - 1) 
+	{
+		Console::WordWrap(WINDOW_WIDTH / 2 - 15, WINDOW_HEIGHT / 2, 30, "You Lose. Press 'R' to play again";
+	}
+	
 	Console::Lock(false);
 }
 
