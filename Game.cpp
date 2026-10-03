@@ -99,31 +99,30 @@ void Game::Render() const
 void Game::CheckCollision()
 {
     // TODO #4 - Update collision to check all bricks
-    for (auto it = bricks.begin(); it != bricks.end(); ++it)
+    for (auto it = bricks.begin(); it != bricks.end(); ++it) 
     {
-        if (it->Contains(ball.x_position + ball.x_velocity,
-            ball.y_position + ball.y_velocity))
+        if(it->Contains(ball.x_position + ball.x_velocity, 
+                        ball.y_position + ball.y_velocity))
         {
             it->color = ConsoleColor(it->color - 1);
             ball.y_velocity *= -1;
-            if (it->color == ConsoleColor::Black) {
+
+            if (it->color == ConsoleColor::Black)
                 bricks.erase(it);
-
-                break;
-            }
-        }
-        if (bricks.empty())
-            ball.moving = false;
-        if (paddle.Contains(ball.x_position + ball.x_velocity, ball.y_velocity + ball.y_position))
-        {
-            ball.y_velocity *= -1;
-        }
-
-        if (ball.y_position >= WINDOW_HEIGHT - 1)
-        {
-            lost = true;
-            ball.moving = false;
+            
+            break;
         }
     }
-
+    
+    if (bricks.empty())
+        ball.moving = false;
+    if (paddle.Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity)) 
+    {
+        ball.y_velocity *= -1;
+    }
+    if (ball.y_position >= WINDOW_HEIGHT - 1) 
+    {
+        lost = true;
+        ball.moving = false;
+    }
 }
